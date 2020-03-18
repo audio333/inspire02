@@ -13,17 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('front');
-});
+Route::get('/','PagesController@home')->name('landing');
+Route::get('/about-us','PagesController@aboutUs')->name('about');
+Route::get('/privacy-policy','PagesController@privacyPolicy')->name('privacy');
+
 
 Route::get('/welcome', function () {
     return view('welcome');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
