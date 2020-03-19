@@ -20,9 +20,9 @@ class PostController extends Controller
             'content' => '',
         );
 
-        $posts = Post::all();
+        $posts = Post::latest()->paginate(5);
 
-        return view('pages.post', compact('banner', 'posts'));
+        return view('posts.post', compact('banner', 'posts'));
     }
 
     /**
@@ -54,7 +54,13 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        $banner = array(
+            'title' => '',
+            'subtitle' => 'Dont forget to replace me later',
+            'content' => '',
+        );
+
+        return view('posts.show', compact('post', 'banner'));
     }
 
     /**
