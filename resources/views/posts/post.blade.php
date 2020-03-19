@@ -20,9 +20,8 @@
 					</h2>
 
 					<div class="metabox">
-						<p>Posted by Brad
-							on {{ $post->created_at->toFormattedDateString() }}
-							in News
+						<p>
+							@include('includes.meta')
 						</p>
 					</div>
 

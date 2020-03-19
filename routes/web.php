@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','PagesController@home')->name('landing');
-Route::get('/about-us','PagesController@aboutUs')->name('about');
-Route::get('/privacy-policy','PagesController@privacyPolicy')->name('privacy');
+Route::get('/','PageController@home')->name('landing');
+Route::get('/about-us','PageController@aboutUs')->name('about');
+Route::get('/privacy-policy','PageController@privacyPolicy')->name('privacy');
 
 Route::resource('posts', 'PostController');
+Route::resource('categories', 'CategoryController');
 
 Route::get('/welcome', function () {
     return view('welcome');

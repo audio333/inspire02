@@ -12,14 +12,14 @@
 	</x-page-banner>
 
 	<div class="container container--narrow page-section">
-
 		<div class="metabox metabox--position-up metabox--with-home-link">
 			<p>
 				<a class="metabox__blog-home-link" href="{{ route('posts.index') }}">
 					<i class="fa fa-home" aria-hidden="true"></i> Blog Home
 				</a>
+
 				<span class="metabox__main">
-					Posted by Brad on {{ $post->created_at->toFormattedDateString() }} in News
+					@include('includes.meta')
 				</span>
 			</p>
 		</div>

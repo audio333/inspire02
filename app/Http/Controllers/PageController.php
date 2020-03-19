@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PagesController extends Controller
+class PageController extends Controller
 {
 	public function home() {
-		return view('pages.landing-page');
+		return view('pages.landing_page');
 	}
 
 	public function aboutUs() {
@@ -17,7 +17,7 @@ class PagesController extends Controller
 			'content' => 'This is the about us page',
 		);
 
-		return view('pages.about-us', compact('banner'));
+		return view('pages.about_us', compact('banner'));
 	}
 
 	public function privacyPolicy() {
@@ -27,6 +27,6 @@ class PagesController extends Controller
 			'content' => 'This is the privacy content.',
 		);
 
-		return view('pages.privacy-policy', compact('banner'));
+		return view('pages.privacy_policy', compact('banner'));
 	}
 }

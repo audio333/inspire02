@@ -7,4 +7,8 @@ php artisan migrate
 php artisan migrate:refresh
 php artisan route:list
 php artisan tinker 										# factory(\App\Post::class, 12)->create();
+
+php artisan make:model -a Category
+php artisan migrate
+php artisan tinker 										# factory(\App\Category::class, 8)->create();
 ```
