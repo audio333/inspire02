@@ -11,16 +11,22 @@ class PagesController extends Controller
 	}
 
 	public function aboutUs() {
-		return view('pages.about-us', [
+		$banner = array(
 			'title' => 'About Us',
+			'subtitle' => '',
 			'content' => 'This is the about us page',
-		]);
+		);
+
+		return view('pages.about-us', compact('banner'));
 	}
 
 	public function privacyPolicy() {
-		return view('pages.privacy-policy', [
+		$banner = array(
 			'title' => 'Privacy Policy',
+			'subtitle' => '',
 			'content' => 'This is the privacy content.',
-		]);
+		);
+
+		return view('pages.privacy-policy', compact('banner'));
 	}
 }

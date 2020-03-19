@@ -7,15 +7,17 @@ use Illuminate\View\Component;
 class PageBanner extends Component
 {
     public $title;
+    public $subtitle;
     public $content;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title, $content)
+    public function __construct($title, $subtitle, $content)
     {
         $this->title = $title;
+        $this->subtitle = $subtitle;
         $this->content = $content;
     }
 

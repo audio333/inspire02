@@ -17,6 +17,7 @@ Route::get('/','PagesController@home')->name('landing');
 Route::get('/about-us','PagesController@aboutUs')->name('about');
 Route::get('/privacy-policy','PagesController@privacyPolicy')->name('privacy');
 
+Route::resource('posts', 'PostController');
 
 Route::get('/welcome', function () {
     return view('welcome');

@@ -4,8 +4,9 @@
 
 @section('content')
 	<x-page-banner
-		:title="$title"
-		:content="$content"
+		:title="$banner['title']"
+		:subtitle="$banner['subtitle']"
+		:content="$banner['content']"
 		style="background-image: url(images/library-hero.jpg)"
 	>
 	</x-page-banner>
