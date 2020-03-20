@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Post;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -12,9 +13,17 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Category $category = null)
     {
-        //
+        $posts = $category->posts()->paginate(2);
+
+        $banner = array(
+            'title' => $category->name,
+            'subtitle' => 'Keep up with our latest news.',
+            'content' => '',
+        );
+
+        return view('posts.index', compact('banner', 'posts'));
     }
 
     /**

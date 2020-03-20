@@ -1,18 +1,3 @@
-@extends('layouts.master')
-
-@section('title', 'Post')
-
-@section('content')
-	<x-page-banner
-		:title="$banner['title']"
-		:subtitle="$banner['subtitle']"
-		:content="$banner['content']"
-		style="background-image: url(images/bus.jpg)"
-	>
-	</x-page-banner>
-
-	@if (count($posts) > 0)
-		@foreach ($posts as $post)
 			<div class="container container--narrow page-section">
 				<div class="post-item">
 					<h2 class="headline headline--medium headline--post-title">
@@ -31,9 +16,3 @@
 					</div>
 				</div>
 			</div>
-		@endforeach
-		{{ $posts->links() }}
-	@else
-		<p>No posts found</p>
-	@endif
-@endsection

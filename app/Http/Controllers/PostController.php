@@ -22,7 +22,7 @@ class PostController extends Controller
 
         $posts = Post::latest()->paginate(5);
 
-        return view('posts.post', compact('banner', 'posts'));
+        return view('posts.index', compact('banner', 'posts'));
     }
 
     /**
