@@ -20,8 +20,10 @@ Route::get('/privacy-policy','PageController@privacyPolicy')->name('privacy');
 Route::resource('posts', 'PostController');
 
 
-Route::get('posts/categories/{category:name}', 'CategoryController@index');
+Route::get('posts/categories/{category:name}', 'CategoryController@index')->name('posts.categories');
 Route::resource('categories', 'CategoryController');
+
+Route::get('posts/user/{user:name}', 'UserController@index')->name('posts.user');
 
 Route::get('/welcome', function () {
     return view('welcome');

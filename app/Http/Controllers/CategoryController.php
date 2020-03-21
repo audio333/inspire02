@@ -19,7 +19,7 @@ class CategoryController extends Controller
 
         $banner = array(
             'title' => $category->name,
-            'subtitle' => 'Keep up with our latest news.',
+            'subtitle' => 'Category Archive',
             'content' => '',
         );
 
