@@ -21,6 +21,7 @@ class PostController extends Controller
             'content' => '',
         );
 
+        // -----
         $posts = Post::latest();
 
        if ($month = request('month')) {
@@ -33,6 +34,12 @@ class PostController extends Controller
 
         $posts = $posts->paginate(5);
 
+        // Above can be refactored as:
+        // $posts = Post::latest()
+        //     ->filter(request(['month', 'year']))
+        //     ->get();
+
+        // Temporary
         $archives = Post::selectRaw('year(created_at) year, monthname(created_at) month, count(*) published')
             ->groupBy('year', 'month')
             ->orderByRaw('min(created_at) desc')
