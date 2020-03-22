@@ -18,6 +18,7 @@ Route::get('/about-us','PageController@aboutUs')->name('about');
 Route::get('/privacy-policy','PageController@privacyPolicy')->name('privacy');
 
 Route::resource('posts', 'PostController');
+Route::resource('events', 'EventController');
 
 
 Route::get('posts/categories/{category:name}', 'CategoryController@index')->name('posts.categories');

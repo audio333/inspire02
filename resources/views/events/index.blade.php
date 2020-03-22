@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Post')
+@section('title', 'Events')
 
 @section('content')
 	<x-page-banner
@@ -14,20 +14,20 @@
 	<h3>Archives</h3>
 	@foreach ($archives as $stats)
 		<li>
-			<a href="/posts/?month={{ $stats['month'] }}&year={{ $stats['year'] }}">
+			<a href="/events/?month={{ $stats['month'] }}&year={{ $stats['year'] }}">
 				{{ $stats['month'] . ' ' . $stats['year'] }}
 			</a>
 		</li>
 	@endforeach
 
 	<div class="container container--narrow page-section">
-	@if (count($posts) > 0)
-		@foreach ($posts as $post)
-			@include('posts.post')
-		@endforeach
-		{{ $posts->appends(request()->except('page'))->links() }}
-	@else
-		<p>No posts found</p>
-	@endif
+		@if (count($events) > 0)
+			@foreach ($events as $event)
+				@include('events.event')
+			@endforeach
+			{{ $events->appends(request()->except('page'))->links() }}
+		@else
+			<p>No events found</p>
+		@endif
 	</div>
 @endsection

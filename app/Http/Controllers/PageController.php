@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use App\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -12,7 +14,13 @@ class PageController extends Controller
 			->take(2)
 			->get();
 
-		return view('pages.landing_page', compact('posts'));
+      $today = Carbon::today()->toDateString();
+      $events = Event::whereDate('event_date', '>=', $today)
+      	->orderBy('event_date', 'asc')
+      	->take(2)
+      	->get();
+
+		return view('pages.landing_page', compact('posts', 'events'));
 	}
 
 	public function aboutUs() {

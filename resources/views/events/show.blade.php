@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
-@section('title', $post->title)
+@section('title', $event->title)
 
 @section('content')
 	<x-page-banner
-		:title="$post->title"
+		:title="$event->title"
 		:subtitle="$banner['subtitle']"
 		:content="$banner['content']"
 		style="background-image: url(images/bus.jpg)"
@@ -14,16 +14,16 @@
 	<div class="container container--narrow page-section">
 		<div class="metabox metabox--position-up metabox--with-home-link">
 			<p>
-				<a class="metabox__blog-home-link" href="{{ route('posts.index') }}">
-					<i class="fa fa-home" aria-hidden="true"></i> Blog Home
+				<a class="metabox__blog-home-link" href="{{ route('events.index') }}">
+					<i class="fa fa-home" aria-hidden="true"></i> Events Home
 				</a>
 
 				<span class="metabox__main">
-					@include('posts.meta')
+					{{ $event->title }}
 				</span>
 			</p>
 		</div>
 
-		<div class="generic-content">{{ $post->content }}</div>
+		<div class="generic-content">{{ $event->content }}</div>
 	</div>
 @endsection
