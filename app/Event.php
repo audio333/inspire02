@@ -12,4 +12,9 @@ class Event extends Model
 	 * @var array
 	 */
 	protected $dates = ['event_date'];
+
+	public function programs()
+	{
+		$this->belongsToMany(Program::class);
+	}
 }

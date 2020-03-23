@@ -21,6 +21,9 @@ Route::resource('posts', 'PostController');
 Route::resource('events', 'EventController');
 Route::get('/past-events', 'EventController@pastEvents')->name('events.past');
 
+Route::resource('programs', 'ProgramController');
+Route::get('/programs/{program:title}', 'ProgramController@show');
+
 Route::get('posts/categories/{category:name}', 'CategoryController@index')->name('posts.categories');
 Route::resource('categories', 'CategoryController');
 
