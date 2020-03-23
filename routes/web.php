@@ -19,7 +19,7 @@ Route::get('/privacy-policy','PageController@privacyPolicy')->name('privacy');
 
 Route::resource('posts', 'PostController');
 Route::resource('events', 'EventController');
-
+Route::get('/past-events', 'EventController@pastEvents')->name('events.past');
 
 Route::get('posts/categories/{category:name}', 'CategoryController@index')->name('posts.categories');
 Route::resource('categories', 'CategoryController');

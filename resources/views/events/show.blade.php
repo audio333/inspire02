@@ -14,8 +14,8 @@
 	<div class="container container--narrow page-section">
 		<div class="metabox metabox--position-up metabox--with-home-link">
 			<p>
-				<a class="metabox__blog-home-link" href="{{ route('events.index') }}">
-					<i class="fa fa-home" aria-hidden="true"></i> Events Home
+				<a class="metabox__blog-home-link" href="{{ URL::previous() }}">
+					<i class="fa fa-home" aria-hidden="true"></i> Events
 				</a>
 
 				<span class="metabox__main">

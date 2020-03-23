@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Events')
+@section('title', 'Past Events')
 
 @section('content')
 	<x-page-banner
@@ -14,7 +14,7 @@
 	<h3>By Month</h3>
 	@foreach ($archives as $stats)
 		<li>
-			<a href="/events/?month={{ $stats['month'] }}&year={{ $stats['year'] }}">
+			<a href="/past-events/?month={{ $stats['month'] }}&year={{ $stats['year'] }}">
 				{{ $stats['month'] . ' ' . $stats['year'] }}
 			</a>
 		</li>
@@ -29,8 +29,8 @@
 
 			<hr class="section-break">
 
-			<p>Looking for a recap of past events?
-				<a href="{{ route('events.past') }}">Check out our past events archives.</a>
+			<p>Looking for upcoming events?
+				<a href="{{ route('events.index') }}">Check out our upcoming events.</a>
 			</p>
 		@else
 			<p>No events found</p>
