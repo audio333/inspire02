@@ -15,6 +15,6 @@ class Event extends Model
 
 	public function programs()
 	{
-		$this->belongsToMany(Program::class);
+		return $this->belongsToMany(Program::class);
 	}
 }

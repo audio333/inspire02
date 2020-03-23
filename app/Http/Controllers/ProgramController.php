@@ -60,7 +60,9 @@ class ProgramController extends Controller
             'content' => '',
         );
 
-        return view('programs.show', compact('program', 'banner'));
+        $events = $program->events;
+
+        return view('programs.show', compact('program', 'banner', 'events'));
     }
 
     /**

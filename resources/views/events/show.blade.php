@@ -25,5 +25,17 @@
 		</div>
 
 		<div class="generic-content">{{ $event->content }}</div>
+
+		@if (count($programs) > 0)
+			<hr class="section-break">
+			<h2 class="headline headline--medium">Related Program(s)</h2>
+			<ul class="link-list min-list">
+				@foreach ($programs as $program)
+					<li>
+						<a href="{{ route('programs.show', $program->title) }}">{{ $program->title }}</a>
+					</li>
+				@endforeach
+			</ul>
+		@endif
 	</div>
 @endsection

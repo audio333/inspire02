@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Program;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -121,7 +122,9 @@ class EventController extends Controller
             'content' => '',
         );
 
-        return view('events.show', compact('event', 'banner'));
+        $programs = $event->programs;
+
+        return view('events.show', compact('event', 'banner', 'programs'));
     }
 
     /**

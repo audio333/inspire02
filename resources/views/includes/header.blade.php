@@ -19,7 +19,7 @@
 					<nav class="main-navigation">
 						<ul>
 							<li><a href="{{ route('about') }}">About Us</a></li>
-							<li><a href="#">Programs</a></li>
+							<li><a href="{{ route('programs.index') }}">Programs</a></li>
 							<li><a href="{{ route('events.index') }}">Events</a></li>
 							<li><a href="#">Campuses</a></li>
 							<li><a href="{{ route('posts.index') }}">Blog</a></li>
