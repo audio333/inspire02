@@ -26,6 +26,20 @@
 
 		<div class="generic-content">{{ $program->content }}</div>
 
+		@if (count($professors) > 0)
+			<hr class="section-break">
+			<h2 class="headline headline--medium">{{ $program->title }} Professors</h2>
+
+			@foreach ($professors as $professor)
+				<li>
+					<a href="{{ route('professors.show', $professor->title) }}">
+						{{ $professor->title }}
+					</a>
+				</li>
+			@endforeach
+		@endif
+
+
 		@if (count($events) > 0)
 			<hr class="section-break">
 			<h2 class="headline headline--medium">Upcoming {{ $program->title }} Events</h2>

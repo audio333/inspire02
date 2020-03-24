@@ -10,4 +10,9 @@ class Program extends Model
 	{
 		return $this->belongsToMany(Event::class);
 	}
+
+	public function professors()
+	{
+		return $this->belongsToMany(Professor::class);
+	}
 }

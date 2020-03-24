@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Program;
+use App\Professor;
 use Illuminate\Http\Request;
 
-class ProgramController extends Controller
+class ProfessorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,15 +14,7 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $banner = array(
-            'title' => 'All Programs',
-            'subtitle' => 'There is something for everyone. Have a look around.',
-            'content' => '',
-        );
-
-        $programs = Program::orderBy('title', 'asc')->get();
-
-        return view('programs.index', compact('programs', 'banner'));
+        //
     }
 
     /**
@@ -49,30 +41,29 @@ class ProgramController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Program  $program
+     * @param  \App\Professor  $professor
      * @return \Illuminate\Http\Response
      */
-    public function show(Program $program)
+    public function show(Professor $professor)
     {
         $banner = array(
-            'title' => $program->title,
+            'title' => $professor->title,
             'subtitle' => 'Dont forget to replace me later',
             'content' => '',
         );
 
-        $events = $program->events;
-        $professors = $program->professors;
+        $programs = $professor->programs;
 
-        return view('programs.show', compact('program', 'banner', 'events', 'professors'));
+        return view('professors.show', compact('professor', 'banner', 'programs'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Program  $program
+     * @param  \App\Professor  $professor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Program $program)
+    public function edit(Professor $professor)
     {
         //
     }
@@ -81,10 +72,10 @@ class ProgramController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Program  $program
+     * @param  \App\Professor  $professor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Program $program)
+    public function update(Request $request, Professor $professor)
     {
         //
     }
@@ -92,10 +83,10 @@ class ProgramController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Program  $program
+     * @param  \App\Professor  $professor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Program $program)
+    public function destroy(Professor $professor)
     {
         //
     }

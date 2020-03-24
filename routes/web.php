@@ -18,12 +18,16 @@ Route::get('/about-us','PageController@aboutUs')->name('about');
 Route::get('/privacy-policy','PageController@privacyPolicy')->name('privacy');
 
 Route::resource('posts', 'PostController');
+
 Route::resource('events', 'EventController');
 Route::get('/events/{event:title}', 'EventController@show')->name('events.show');
 Route::get('/past-events', 'EventController@pastEvents')->name('events.past');
 
 Route::resource('programs', 'ProgramController');
 Route::get('/programs/{program:title}', 'ProgramController@show')->name('programs.show');
+
+Route::resource('professors', 'ProfessorController');
+Route::get('/professors/{professor:title}', 'ProfessorController@show')->name('professors.show');
 
 Route::get('posts/categories/{category:name}', 'CategoryController@index')->name('posts.categories');
 Route::resource('categories', 'CategoryController');
