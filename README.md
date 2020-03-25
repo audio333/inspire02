@@ -12,3 +12,6 @@ php artisan make:model -a Category
 php artisan migrate
 php artisan tinker 										# factory(\App\Category::class, 8)->create();
 ```
+Package: Laravel Media Library
+Github: https://github.com/spatie/laravel-medialibrary
+Docs (Installation & Setup): https://docs.spatie.be/laravel-medialibrary/v7/installation-setup/
