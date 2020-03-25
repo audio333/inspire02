@@ -24,7 +24,7 @@ class ProfessorController extends Controller
      */
     public function create()
     {
-        //
+        return view('professors.create');
     }
 
     /**
@@ -35,7 +35,15 @@ class ProfessorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Professor::create([
+            'title' => request('title'),
+            'content' => request('content')
+        ])
+            ->addMedia(request('image'))
+            ->preservingOriginal()
+            ->toMediaCollection();
+
+        return redirect()->back();
     }
 
     /**
