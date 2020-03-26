@@ -15,3 +15,14 @@ php artisan tinker 										# factory(\App\Category::class, 8)->create();
 Package: Laravel Media Library
 Github: https://github.com/spatie/laravel-medialibrary
 Docs (Installation & Setup): https://docs.spatie.be/laravel-medialibrary/v7/installation-setup/
+
+```bash
+php artisan storage:link
+php artisan make:migration add_subtitle_to_professors_table --table=professors
+```
+
+> update APP_URL (port) in .env file and use:
+
+```bash
+php artisan serve
+```

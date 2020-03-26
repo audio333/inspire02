@@ -35,13 +35,23 @@ class ProfessorController extends Controller
      */
     public function store(Request $request)
     {
-        Professor::create([
-            'title' => request('title'),
-            'content' => request('content')
-        ])
-            ->addMedia(request('image'))
-            ->preservingOriginal()
-            ->toMediaCollection();
+        $attributes = $this->validateProfessor();
+
+        $professor =  Professor::create($attributes);
+
+        if ($request->hasFile('avatar')) {
+            $professor
+                ->addMedia($request->avatar)
+                ->preservingOriginal()
+                ->toMediaCollection('prof-avatars');
+        }
+
+        if ($request->hasFile('banner')) {
+            $professor
+                ->addMedia($request->banner)
+                ->preservingOriginal()
+                ->toMediaCollection('page-banners');
+        }
 
         return redirect()->back();
     }
@@ -54,15 +64,16 @@ class ProfessorController extends Controller
      */
     public function show(Professor $professor)
     {
+        $pageBanners = $professor->getMedia('page-banners');
         $banner = array(
             'title' => $professor->title,
-            'subtitle' => 'Dont forget to replace me later',
-            'content' => '',
+            'subtitle' => $professor->subtitle,
         );
 
+        $avatars = $professor->getMedia('prof-avatars');
         $programs = $professor->programs;
 
-        return view('professors.show', compact('professor', 'banner', 'programs'));
+        return view('professors.show', compact('professor', 'banner', 'programs', 'avatars', 'pageBanners'));
     }
 
     /**
@@ -97,5 +108,13 @@ class ProfessorController extends Controller
     public function destroy(Professor $professor)
     {
         //
+    }
+
+    protected function validateProfessor()
+    {
+        return request()->validate([
+            'title' => 'required',
+            'content' => 'required'
+        ]);
     }
 }

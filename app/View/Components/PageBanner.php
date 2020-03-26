@@ -8,17 +8,17 @@ class PageBanner extends Component
 {
     public $title;
     public $subtitle;
-    public $content;
+    public $image;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title, $subtitle, $content)
+    public function __construct($title, $subtitle, $image)
     {
         $this->title = $title;
         $this->subtitle = $subtitle;
-        $this->content = $content;
+        $this->image = $image;
     }
 
     /**

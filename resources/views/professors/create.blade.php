@@ -9,6 +9,9 @@
 				<input type="text" class="form-control" placeholder="Enter Title" name="title">
 			</div>
 			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Enter Subtitle" name="subtitle">
+			</div>
+			<div class="form-group">
 				<textarea class="form-control" placeholder="Enter Content" name="content"></textarea>
 			</div>
 
@@ -17,8 +20,18 @@
 					<span class="input-group-text">Upload</span>
 				</div>
 				<div class="custom-file">
-					<input type="file" class="custom-file-input" id="inputGroupFile01" name="image">
-					<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+					<input type="file" class="custom-file-input" id="inputGroupFile01" name="avatar">
+					<label class="custom-file-label" for="inputGroupFile01">Choose Avatar</label>
+				</div>
+			</div>
+
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Upload</span>
+				</div>
+				<div class="custom-file">
+					<input type="file" class="custom-file-input" id="inputGroupFile02" name="banner">
+					<label class="custom-file-label" for="inputGroupFile02">Choose Banner</label>
 				</div>
 			</div>
 

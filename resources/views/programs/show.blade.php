@@ -6,8 +6,7 @@
 	<x-page-banner
 		:title="$program->title"
 		:subtitle="$banner['subtitle']"
-		:content="$banner['content']"
-		style="background-image: url(images/bus.jpg)"
+		:image="'images/bus.jpg'"
 	>
 	</x-page-banner>
 
@@ -30,13 +29,16 @@
 			<hr class="section-break">
 			<h2 class="headline headline--medium">{{ $program->title }} Professors</h2>
 
-			@foreach ($professors as $professor)
-				<li>
-					<a href="{{ route('professors.show', $professor->title) }}">
-						{{ $professor->title }}
-					</a>
-				</li>
-			@endforeach
+			<ul class="professor-cards">
+				@foreach ($professors as $professor)
+					<li class="professor-card__list-item">
+						<a class="professor-card" href="{{ route('professors.show', $professor->title) }}">
+							<img src="{{ $professor->getMedia('prof-avatars')->first()->getUrl('prof-landscape') }}" alt="avatar" class="professor-card__image">
+							<span class="professor-card__name">{{ $professor->title }}</span>
+						</a>
+					</li>
+				@endforeach
+			</ul>
 		@endif
 
 
