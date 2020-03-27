@@ -6,8 +6,10 @@
 	<x-page-banner
 		:title="$banner['title']"
 		:subtitle="$banner['subtitle']"
-		:content="$banner['content']"
-		style="background-image: url(images/bus.jpg)"
+		:image="'/images/page-banner.jpg'"
 	>
 	</x-page-banner>
+	<div class="container container--narrow page-section">
+		{{ $content }}
+	</div>
 @endsection

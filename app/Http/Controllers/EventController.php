@@ -19,7 +19,6 @@ class EventController extends Controller
         $banner = array(
             'title' => 'All Events',
             'subtitle' => 'See what is going on our world.',
-            'content' => '',
         );
 
         $today = Carbon::today()->toDateString();
@@ -56,7 +55,6 @@ class EventController extends Controller
         $banner = array(
             'title' => 'Past Events',
             'subtitle' => 'A recap of our past events.',
-            'content' => '',
         );
 
         $today = Carbon::today()->toDateString();
@@ -119,7 +117,6 @@ class EventController extends Controller
         $banner = array(
             'title' => '',
             'subtitle' => 'Dont forget to replace me later',
-            'content' => '',
         );
 
         $programs = $event->programs;

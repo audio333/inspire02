@@ -17,7 +17,6 @@ class ProgramController extends Controller
         $banner = array(
             'title' => 'All Programs',
             'subtitle' => 'There is something for everyone. Have a look around.',
-            'content' => '',
         );
 
         $programs = Program::orderBy('title', 'asc')->get();
@@ -57,7 +56,6 @@ class ProgramController extends Controller
         $banner = array(
             'title' => $program->title,
             'subtitle' => 'Dont forget to replace me later',
-            'content' => '',
         );
 
         $events = $program->events;

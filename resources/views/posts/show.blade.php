@@ -6,8 +6,7 @@
 	<x-page-banner
 		:title="$post->title"
 		:subtitle="$banner['subtitle']"
-		:content="$banner['content']"
-		style="background-image: url(images/bus.jpg)"
+		:image="'/images/page-banner.jpg'"
 	>
 	</x-page-banner>
 

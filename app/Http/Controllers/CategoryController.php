@@ -20,7 +20,6 @@ class CategoryController extends Controller
         $banner = array(
             'title' => $category->name,
             'subtitle' => 'Category Archive',
-            'content' => '',
         );
 
         return view('posts.index', compact('banner', 'posts'));

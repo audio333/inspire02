@@ -9,14 +9,13 @@ class UserController extends Controller
 {
 	public function index(User $user)
 	{
-     $posts = $user->posts()->paginate(2);
+       $posts = $user->posts()->paginate(2);
 
-     $banner = array(
-         'title' => $user->name,
-         'subtitle' => 'User Archive',
-         'content' => '',
-     );
+       $banner = array(
+           'title' => $user->name,
+           'subtitle' => 'User Archive',
+       );
 
-     return view('posts.index', compact('banner', 'posts'));
-	}
+       return view('posts.index', compact('banner', 'posts'));
+   }
 }

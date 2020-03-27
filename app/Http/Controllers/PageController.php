@@ -27,19 +27,21 @@ class PageController extends Controller
 		$banner = array(
 			'title' => 'About Us',
 			'subtitle' => '',
-			'content' => 'This is the about us page',
 		);
 
-		return view('pages.about_us', compact('banner'));
+		$content = 'This is the about us page';
+
+		return view('pages.about_us', compact('banner', 'content'));
 	}
 
 	public function privacyPolicy() {
 		$banner = array(
 			'title' => 'Privacy Policy',
 			'subtitle' => '',
-			'content' => 'This is the privacy content.',
 		);
 
-		return view('pages.privacy_policy', compact('banner'));
+		$content = 'This is the privacy content.';
+
+		return view('pages.privacy_policy', compact('banner', 'content'));
 	}
 }
