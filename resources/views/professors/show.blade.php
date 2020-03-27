@@ -6,7 +6,7 @@
 	<x-page-banner
 		:title="$banner['title']"
 		:subtitle="$banner['subtitle']"
-		:image="$pageBanners->first()->getUrl('page-banner')"
+		:image="$banner['image']"
 	>
 	</x-page-banner>
 
@@ -15,7 +15,7 @@
 		<div class="generic-content">
 			<div class="row group">
 				<div class="one-third">
-					<img src="{{ $avatars->first()->getUrl('prof-portrait') }}" alt="image">
+					<img src="{{ $avatar }}" alt="image">
 				</div>
 				<div class="two-thirds">
 					{{ $professor->content }}

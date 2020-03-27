@@ -64,16 +64,16 @@ class ProfessorController extends Controller
      */
     public function show(Professor $professor)
     {
-        $pageBanners = $professor->getMedia('page-banners');
         $banner = array(
             'title' => $professor->title,
             'subtitle' => $professor->subtitle,
+            'image' => $professor->getFirstMediaUrl('page-banners', 'page-banner')
         );
 
-        $avatars = $professor->getMedia('prof-avatars');
+        $avatar = $professor->getFirstMediaUrl('prof-avatars', 'prof-portrait');
         $programs = $professor->programs;
 
-        return view('professors.show', compact('professor', 'banner', 'programs', 'avatars', 'pageBanners'));
+        return view('professors.show', compact('professor', 'banner', 'programs', 'avatar'));
     }
 
     /**
@@ -84,7 +84,7 @@ class ProfessorController extends Controller
      */
     public function edit(Professor $professor)
     {
-        //
+        return view('professors.edit', compact('professor'));
     }
 
     /**
@@ -96,7 +96,23 @@ class ProfessorController extends Controller
      */
     public function update(Request $request, Professor $professor)
     {
-        //
+        $professor->update($this->validateProfessor());
+
+        if ($request->hasFile('avatar')) {
+            $professor
+                ->addMedia($request->avatar)
+                ->preservingOriginal()
+                ->toMediaCollection('prof-avatars');
+        }
+
+        if ($request->hasFile('banner')) {
+            $professor
+                ->addMedia($request->banner)
+                ->preservingOriginal()
+                ->toMediaCollection('page-banners');
+        }
+
+        return redirect('/');
     }
 
     /**
@@ -107,14 +123,17 @@ class ProfessorController extends Controller
      */
     public function destroy(Professor $professor)
     {
-        //
+        $professor->delete();
+
+        return redirect()->back();
     }
 
     protected function validateProfessor()
     {
         return request()->validate([
-            'title' => 'required',
-            'content' => 'required'
+            'title' => 'required|max:30',
+            'subtitle' => 'max:50',
+            'content' => 'required|min:3'
         ]);
     }
 }

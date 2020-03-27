@@ -6,17 +6,21 @@
 			<div class="alert alert-danger">{{ session()->get('error') }}</div>
 		@endif
 
-		<h2>New Professor</h2>
-		<form action="{{ route('professors.store') }}" method="POST" enctype="multipart/form-data">
+		<h2>Edit Professor</h2>
+		<form action="{{ route('professors.update', $professor->title) }}" method="POST" enctype="multipart/form-data">
 			@csrf
+			@method('PUT')
+
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Enter Title" name="title">
+				<input type="text" class="form-control" placeholder="Enter Title" name="title" value="{{ $professor->title }}">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Enter Subtitle" name="subtitle">
+				<input type="text" class="form-control" placeholder="Enter Subtitle" name="subtitle" value="{{ $professor->subtitle }}">
 			</div>
 			<div class="form-group">
-				<textarea class="form-control" placeholder="Enter Content" name="content"></textarea>
+				<textarea class="form-control" placeholder="Enter Content" name="content">
+					{{ $professor->content }}
+				</textarea>
 			</div>
 
 			<div class="input-group mb-3">

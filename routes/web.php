@@ -28,6 +28,8 @@ Route::get('/programs/{program:title}', 'ProgramController@show')->name('program
 
 Route::resource('professors', 'ProfessorController');
 Route::get('/professors/{professor:title}', 'ProfessorController@show')->name('professors.show');
+Route::get('/professors/{professor:title}/edit', 'ProfessorController@edit')->name('professors.edit');
+Route::put('/professors/{professor:title}', 'ProfessorController@update')->name('professors.update');
 
 Route::get('posts/categories/{category:name}', 'CategoryController@index')->name('posts.categories');
 Route::resource('categories', 'CategoryController');

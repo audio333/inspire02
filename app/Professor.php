@@ -29,8 +29,8 @@ class Professor extends Model implements HasMedia
 	         ->acceptsMimeTypes(['image/jpeg', 'image/png']);
 
 	    $this->addMediaCollection('page-banners')
-	         ->useFallbackUrl('/images/page-banner.png')
-	         ->useFallbackPath(public_path('/images/page-banner.png'))
+	         ->useFallbackUrl('/images/page-banner.jpg')
+	         ->useFallbackPath(public_path('/images/page-banner.jpg'))
 	         ->singleFile()
 	         ->acceptsMimeTypes(['image/jpeg', 'image/png']);
 	}
