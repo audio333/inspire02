@@ -10,23 +10,16 @@
 	>
 	</x-page-banner>
 
-	<h3>Archives</h3>
-	@foreach ($archives as $stats)
-		<li>
-			<a href="/posts/?month={{ $stats['month'] }}&year={{ $stats['year'] }}">
-				{{ $stats['month'] . ' ' . $stats['year'] }}
-			</a>
-		</li>
-	@endforeach
+	@include('includes.archive')
 
 	<div class="container container--narrow page-section">
-	@if (count($posts) > 0)
-		@foreach ($posts as $post)
-			@include('posts.post')
-		@endforeach
-		{{ $posts->appends(request()->except('page'))->links() }}
-	@else
-		<p>No posts found</p>
-	@endif
+		@if (count($posts) > 0)
+			@foreach ($posts as $post)
+				@include('posts.post')
+			@endforeach
+			{{ $posts->appends(request()->except('page'))->links() }}
+		@else
+			<p>No posts found</p>
+		@endif
 	</div>
 @endsection

@@ -15,12 +15,22 @@ class CategoryController extends Controller
      */
     public function index(Category $category = null)
     {
-        $posts = $category->posts()->paginate(2);
-
         $banner = array(
             'title' => $category->name,
             'subtitle' => 'Category Archive',
         );
+
+        $posts = $category->posts();
+
+        if ($month = request('month')) {
+            $posts->whereMonth('created_at', Carbon::parse($month)->month);
+        }
+
+        if ($year = request('year')) {
+            $posts->whereYear('created_at', $year);
+        }
+
+        $posts = $posts->paginate(5);
 
         return view('posts.index', compact('banner', 'posts'));
     }

@@ -18,7 +18,6 @@ class PostController extends Controller
         $banner = array(
             'title' => 'Welcome to our blog!',
             'subtitle' => 'Keep with our latest news',
-            'content' => '',
         );
 
         // -----
@@ -39,14 +38,7 @@ class PostController extends Controller
         //     ->filter(request(['month', 'year']))
         //     ->get();
 
-        // Temporary
-        $archives = Post::selectRaw('year(created_at) year, monthname(created_at) month, count(*) published')
-            ->groupBy('year', 'month')
-            ->orderByRaw('min(created_at) desc')
-            ->get()
-            ->toArray();
-
-        return view('posts.index', compact('banner', 'posts', 'archives'));
+        return view('posts.index', compact('banner', 'posts'));
     }
 
     /**
@@ -56,7 +48,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -81,7 +73,6 @@ class PostController extends Controller
         $banner = array(
             'title' => '',
             'subtitle' => 'Dont forget to replace me later',
-            'content' => '',
         );
 
         return view('posts.show', compact('post', 'banner'));
