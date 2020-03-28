@@ -12,11 +12,7 @@
 
 	<div class="container container--narrow page-section">
 		@if (count($programs) > 0)
-			<ul class="link-list min-list">
-				@foreach ($programs as $program)
-						<li><a href="/programs/{{ $program->title }}">{{ $program->title }}</a></li>
-				@endforeach
-			</ul>
+			<x-program :programs="$programs"></x-program>
 		@else
 			<p>No programs found</p>
 		@endif

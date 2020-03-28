@@ -44,9 +44,8 @@
 		@if (count($events) > 0)
 			<hr class="section-break">
 			<h2 class="headline headline--medium">Upcoming {{ $program->title }} Events</h2>
-			@foreach ($events as $event)
-				@include('events.event')
-			@endforeach
+
+			<x-event :events="$events"></x-event>
 		@endif
 
 	</div>

@@ -21,9 +21,7 @@
 
 	<div class="container container--narrow page-section">
 		@if (count($events) > 0)
-			@foreach ($events as $event)
-				@include('events.event')
-			@endforeach
+			<x-event :events="$events"></x-event>
 			{{ $events->appends(request()->except('page'))->links() }}
 
 			<hr class="section-break">

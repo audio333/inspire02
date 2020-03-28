@@ -18,9 +18,7 @@
 			<div class="full-width-split__inner">
 				<h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
 
-					@foreach ($events as $event)
-						@include('events.event')
-					@endforeach
+				<x-event :events="$events"></x-event>
 
 				<p class="t-center no-margin"><a href="{{ route('events.index') }}" class="btn btn--blue">View All Events</a></p>
 			</div>
