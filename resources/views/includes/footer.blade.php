@@ -51,6 +51,8 @@
 
 			</div>
 		</footer>
+
+		<search-component></search-component>
 	</div>
 
 <script src="{{ mix('/js/app.js') }}"></script>

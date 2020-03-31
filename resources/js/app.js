@@ -8,6 +8,10 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import VueFuse from 'vue-fuse'
+
+Vue.use(VueFuse)
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -21,6 +25,8 @@ window.Vue = require('vue');
 
 // Vue.component('articles', require('./components/Articles.vue').default);
 Vue.component('hero-slider', require('./components/HeroSlider.vue').default);
+Vue.component('search-component', require('./components/SearchComponent.vue').default);
+Vue.component('search-focus', require('./components/ToggleOverlay.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
