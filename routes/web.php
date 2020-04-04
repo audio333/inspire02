@@ -42,4 +42,6 @@ Route::get('/welcome', function () {
 
 Auth::routes();
 
+Route::get('/admin/{any?}', 'AdminController@index')->where('any', '.*');
+
 Route::get('/home', 'HomeController@index')->name('home');

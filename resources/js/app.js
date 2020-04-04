@@ -4,13 +4,17 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+ require('./bootstrap');
 
-window.Vue = require('vue');
+ window.Vue = require('vue');
 
-import VueFuse from 'vue-fuse'
+ import Vuetify from "../plugins/vuetify"
 
-Vue.use(VueFuse)
+ import VueRouter from 'vue-router'
+ import VueFuse from 'vue-fuse'
+
+ Vue.use(VueRouter)
+ Vue.use(VueFuse)
 
 /**
  * The following block of code may be used to automatically register your
@@ -28,12 +32,50 @@ Vue.component('hero-slider', require('./components/HeroSlider.vue').default);
 Vue.component('search-component', require('./components/SearchComponent.vue').default);
 Vue.component('search-focus', require('./components/ToggleOverlay.vue').default);
 
+// Admin Panel
+Vue.component('admin', require('./components/Admin.vue').default);
+import Dashboard from './pages/Dashboard'
+import Users from './pages/Users'
+import Roles from './pages/Roles'
+import Permissions from './pages/Permissions'
+import Settings from './pages/Settings'
+
+const routes = [
+	{
+		path: '/admin/',
+		component: Dashboard
+	},
+	{
+		path: '/admin/users',
+		component: Users
+	},
+	{
+		path: '/admin/roles',
+		component: Roles
+	},
+	{
+		path: '/admin/permissions',
+		component: Permissions
+	},
+	{
+		path: '/admin/settings',
+		component: Settings
+	},
+];
+
+const router = new VueRouter({
+	mode: 'history',
+	routes,
+});
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-});
+ const app = new Vue({
+ 	el: '#app',
+ 	vuetify: Vuetify,
+ 	router,
+ });
