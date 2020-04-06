@@ -1,11 +1,10 @@
 <template>
-	<v-data-table :headers="headers" :items="tableData" sort-by="calories" class="elevation-1">
+	<v-data-table :headers="headers" :items="tableData" class="elevation-1" :search="search">
 
 		<template v-slot:top>
-			<v-toolbar flat color="white">
-				<v-toolbar-title>My CRUD</v-toolbar-title>
+			<v-toolbar flat>
+				<v-toolbar-title>Users</v-toolbar-title>
 				<v-divider class="mx-4" inset vertical></v-divider>
-				<v-spacer></v-spacer>
 
 				<v-dialog v-model="dialog" max-width="500px">
 					<template v-slot:activator="{ on }">
@@ -19,17 +18,65 @@
 						<v-card-text>
 							<v-container>
 								<v-row>
-									<v-col cols="12" sm="6" md="4">
+									<v-col cols="12" xs="12">
 										<v-text-field v-model="editedItem.name" label="Username"></v-text-field>
 									</v-col>
-									<v-col cols="12" sm="6" md="4">
+
+									<v-col cols="12" xs="12">
 										<v-text-field v-model="editedItem.email" label="Email"></v-text-field>
 									</v-col>
-									<v-col cols="12" sm="6" md="4">
-										<v-text-field v-model="editedItem.role" label="Role"></v-text-field>
+
+									<v-col cols="12" xs="12">
+										<v-text-field
+											v-model="editedItem.password"
+											label="Password"
+											:append-icon="showPassword1 ? 'mdi-eye' : 'mdi-eye-off'"
+											:rules="[rules.required, rules.min]"
+											:type="showPassword1 ? 'text' : 'password'"
+											name="input-10-1"
+											hint="At least 8 characters"
+											counter
+											@click:append="showPassword1 = !showPassword1"
+										></v-text-field>
 									</v-col>
-									<v-col cols="12" sm="6" md="4">
-										<v-text-field v-model="editedItem.permissions" label="Permissions"></v-text-field>
+
+									<v-col cols="12" xs="12">
+										<v-text-field
+											v-model="editedItem.confirm_password"
+											label="Confirm Password"
+											:append-icon="showPassword2 ? 'mdi-eye' : 'mdi-eye-off'"
+											:rules="[rules.required, rules.min, rules.emailMatch]"
+											:type="showPassword2 ? 'text' : 'password'"
+											name="input-10-1"
+											hint="At least 8 characters"
+											counter
+											@click:append="showPassword2 = !showPassword2"
+										></v-text-field>
+									</v-col>
+
+									<v-col cols="12" xs="12">
+										<h3>Roles</h3>
+										<v-select
+											v-model="editedItem.role"
+											:items="allRoles"
+											label="Roles"
+											item-text="name"
+											return-object
+											chips
+										></v-select>
+									</v-col>
+
+									<v-col cols="12" xs="12">
+										<v-select
+											v-model="editedItem.permissions"
+											:items="allPermissions"
+											label="Permissions"
+											item-text="name"
+											item-value="id"
+											return-object
+											multiple
+											chips
+										></v-select>
 									</v-col>
 								</v-row>
 							</v-container>
@@ -42,6 +89,17 @@
 						</v-card-actions>
 					</v-card>
 				</v-dialog>
+
+				<v-spacer></v-spacer>
+				<v-col cols="3" xs="3">
+					<v-text-field
+						v-model="search"
+						append-icon="mdi-magnify"
+						label="Search"
+						single-line
+						hide-details
+			      ></v-text-field>
+			   </v-col>
 
 			</v-toolbar>
 		</template>
@@ -61,12 +119,12 @@
 <script>
 	export default {
 		data: () => ({
+			search: '',
 			dialog: false,
 			headers: [
 				{ text: 'Username', value: 'name' },
 				{ text: 'Email', value: 'email' },
-				{ text: 'Role', value: 'role' },
-				{ text: 'Permissions', value: 'permissions' },
+				{ text: 'Role', value: 'role.name' },
 				{ text: 'Created', value: 'created_at' },
 				{ text: 'Actions', value: 'actions', sortable: false },
 			],
@@ -88,6 +146,14 @@
 				permissions: [],
 				created_at: '',
 			},
+			showPassword1: false,
+			showPassword2: false,
+			password: 'Password',
+			rules: {
+				required: value => !!value || 'Required.',
+				min: v => v.length >= 8 || 'Min 8 characters',
+				emailMatch: () => ('The email and password you entered don\'t match'),
+			}
 		}),
 
 		computed: {
@@ -108,15 +174,14 @@
 
 		methods: {
 			initialize () {
-				this.tableData = [
-					{
-						name: 'Steve',
-						email: 'admin@admin.com',
-						role: {},
-						permissions: [],
-						created_at: '',
-					},
-				]
+				axios.get('/api/users')
+					.then(response => this.tableData = response.data.data);
+
+				axios.get('/api/roles')
+					.then(response => this.allRoles = response.data.data);
+
+				axios.get('/api/permissions')
+					.then(response => this.allPermissions = response.data.data);
 			},
 
 			editItem (item) {
@@ -127,7 +192,10 @@
 
 			deleteItem (item) {
 				const index = this.tableData.indexOf(item)
-				confirm('Are you sure you want to delete this item?') && this.tableData.splice(index, 1)
+				confirm('Are you sure you want to delete this item?') && this.tableData.splice(index, 1);
+
+				axios.delete('/api/users/' + item.id)
+					.then(response => console.log(response.data));
 			},
 
 			close () {
@@ -140,11 +208,17 @@
 
 			save () {
 				if (this.editedIndex > -1) {
-					Object.assign(this.tableData[this.editedIndex], this.editedItem)
+					Object.assign(this.tableData[this.editedIndex], this.editedItem);
+
+					axios.put('/api/users/' + this.editedItem.id, this.editedItem)
+						.then(response => console.log(response.data));
 				} else {
-					this.tableData.push(this.editedItem)
+					this.tableData.push(this.editedItem);
+
+					axios.post('/api/users/', this.editedItem)
+						.then(response => console.log(response.data));
 				}
-				this.close()
+				this.close();
 			},
 		},
 	}

@@ -20,3 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // List
 Route::get('/posts', 'ApiController@posts');
+
+Route::apiResource('users', 'AdminApi\UserController');
+Route::apiResource('roles', 'AdminApi\RoleController');
+Route::apiResource('permissions', 'AdminApi\PermissionController');
