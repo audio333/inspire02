@@ -16,6 +16,7 @@ class RoleController extends Controller
     function __construct(Role $role)
     {
         $this->role = $role;
+        $this->middleware('auth:api');
     }
     /**
      * Display a listing of the resource.
