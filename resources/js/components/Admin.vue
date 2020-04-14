@@ -13,6 +13,7 @@
 				</v-list-item>
 
 				<v-list-group
+					v-if="$auth.isAdmin()"
 					v-for="item in items"
 					:key="item.title"
 					v-model="item.active"
@@ -46,6 +47,15 @@
 					</v-list-item-action>
 					<v-list-item-content>
 						<v-list-item-title>Settings</v-list-item-title>
+					</v-list-item-content>
+				</v-list-item>
+
+				<v-list-item link to="/admin/developer">
+					<v-list-item-action>
+						<v-icon>mdi-settings</v-icon>
+					</v-list-item-action>
+					<v-list-item-content>
+						<v-list-item-title>Developer</v-list-item-title>
 					</v-list-item-content>
 				</v-list-item>
 

@@ -16,6 +16,12 @@
  Vue.use(VueRouter)
  Vue.use(VueFuse)
 
+ console.log(window.user);
+
+ import Auth from './auth'
+
+ Vue.prototype.$auth = new Auth(window.user);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -32,6 +38,11 @@ Vue.component('hero-slider', require('./components/HeroSlider.vue').default);
 Vue.component('search-component', require('./components/SearchComponent.vue').default);
 Vue.component('search-focus', require('./components/ToggleOverlay.vue').default);
 
+// Laravel Passport
+Vue.component('passport-clients', require('./components/passport/Clients.vue').default);
+Vue.component('passport-authorized-clients', require('./components/passport/AuthorizedClients.vue').default);
+Vue.component('passport-personal-access-tokens', require('./components/passport/PersonalAccessTokens.vue').default);
+
 // Admin Panel
 Vue.component('admin', require('./components/Admin.vue').default);
 import Dashboard from './pages/Dashboard'
@@ -39,6 +50,7 @@ import Users from './pages/Users'
 import Roles from './pages/Roles'
 import Permissions from './pages/Permissions'
 import Settings from './pages/Settings'
+import Developer from './pages/Developer'
 
 const routes = [
 	{
@@ -60,6 +72,10 @@ const routes = [
 	{
 		path: '/admin/settings',
 		component: Settings
+	},
+	{
+		path: '/admin/developer',
+		component: Developer
 	},
 ];
 
