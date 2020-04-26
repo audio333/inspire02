@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/mark-all-read/{user}', function(User $user) {
+	$user->unreadNotifications->markAsRead();
+	return response(['message' => 'done']);
+});
 
 Route::get('/','PageController@home')->name('landing');
 Route::get('/about-us','PageController@aboutUs')->name('about');

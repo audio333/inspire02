@@ -65,6 +65,30 @@
 		<v-app-bar app clipped-left >
 			<v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 			<v-toolbar-title>Application</v-toolbar-title>
+
+			<v-spacer></v-spacer>
+
+			<v-menu offset-y>
+				<template v-slot:activator="{ on }">
+					<v-btn text icon @click="markAsRead" v-on="on">
+						<v-badge
+						color="red"
+						:content="unreadNotifications.length"
+						overlap
+						>
+							<v-icon>mdi-bell</v-icon>
+						</v-badge>
+					</v-btn>
+				</template>
+				<v-list>
+					<v-list-item v-for="notification in allNotifications" :key="notification.id">
+						<v-list-item-content>
+							<v-list-item-title>{{ notification.data.createdUser.name }} has just registered</v-list-item-title>
+						</v-list-item-content>
+					</v-list-item>
+				</v-list>
+			</v-menu>
+
 		</v-app-bar>
 
 		<v-content>
@@ -93,6 +117,7 @@
 
 		data: () => ({
 			drawer: null,
+			allNotifications: [],
 			items: [
 				{
 					action: 'mdi-account-circle',
@@ -106,9 +131,26 @@
 				},
 			],
 		}),
-
+		props:['user'],
+		methods: {
+			markAsRead() {
+				axios.get('/mark-all-read/' + this.user.id)
+					.then(response => {
+						this.unreadNotifications = [];
+					});
+			}
+		},
+		computed: {
+			unreadNotifications() {
+				return this.allNotifications.filter(notification => {
+					return notification.read_at == null;
+				})
+			}
+		},
 		created () {
 			this.$vuetify.theme.dark = true
+			// console.log('user ', window.user);
+			this.allNotifications = window.user.user.notifications;
 		},
 	}
 </script>

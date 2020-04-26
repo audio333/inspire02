@@ -15,5 +15,5 @@ mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css')
    .version()
    .sourceMaps()
-   .browserSync('university.demo');
-
+   // .browserSync('university.demo');
+   .browserSync('http://127.0.0.1:8001/');

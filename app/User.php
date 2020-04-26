@@ -2,9 +2,11 @@
 
 namespace App;
 
+use App\Notifications\UserRegistered;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Notification;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -42,5 +44,18 @@ class User extends Authenticatable
     public function posts()
      {
         return $this->hasMany(Post::class);
+     }
+
+    public static function boot()
+     {
+        parent::boot();
+
+        static::created(function($model) {
+            // $admins = User::all()->filter(function($user) {
+            //     return $user->hasRole('Admin');
+            // });
+
+            // Notification::send($admins, new UserRegistered($model));
+        });
      }
 }
