@@ -71,19 +71,42 @@
 			<v-menu offset-y>
 				<template v-slot:activator="{ on }">
 					<v-btn text icon @click="markAsRead" v-on="on">
-						<v-badge
-						color="red"
-						:content="unreadNotifications.length"
-						overlap
-						>
+						<v-badge color="red" :content="unreadNotifications.length" overlap>
 							<v-icon>mdi-bell</v-icon>
 						</v-badge>
 					</v-btn>
 				</template>
 				<v-list>
-					<v-list-item v-for="notification in allNotifications" :key="notification.id">
+					<v-list-item :class="{'green': notification.read_at==null}" @click="markAsRead" v-for="notification in allNotifications" :key="notification.id">
 						<v-list-item-content>
-							<v-list-item-title>{{ notification.data.createdUser.name }} has just registered</v-list-item-title>
+							<v-list-item-title>{{ notification.data.createdUser.name }} has just registered on {{ notification.created_at }}</v-list-item-title>
+						</v-list-item-content>
+					</v-list-item>
+				</v-list>
+			</v-menu>
+
+			<v-menu offset-y>
+				<template v-slot:activator="{ on }">
+					<v-btn icon text v-on="on">
+						<v-avatar size="30px">
+				         <img src="https://via.placeholder.com/150" alt="avatar">
+			         </v-avatar>
+					</v-btn>
+				</template>
+				<v-list class="pa-0">
+					<v-list-item>
+						<v-list-item-content>
+							<v-list-item-title>{{ user.name }}</v-list-item-title>
+						</v-list-item-content>
+					</v-list-item>
+				</v-list>
+				<v-list class="pa-0">
+					<v-list-item @click="logout" ripple="ripple" rel="noopener">
+						<v-list-item-action>
+							<v-icon>mdi-account-circle</v-icon>
+						</v-list-item-action>
+						<v-list-item-content>
+							<v-list-item-title>Logout</v-list-item-title>
 						</v-list-item-content>
 					</v-list-item>
 				</v-list>
@@ -111,13 +134,14 @@
 
 <script>
 	export default {
-		props: {
-			source: String,
-		},
+		// props: {
+		// 	source: String,
+		// },
 
 		data: () => ({
 			drawer: null,
 			allNotifications: [],
+			unreadNotifications: [],
 			items: [
 				{
 					action: 'mdi-account-circle',
@@ -132,7 +156,18 @@
 			],
 		}),
 		props:['user'],
+		watch: {
+			allNotifications(val) {
+				this.unreadNotifications = this.allNotifications.filter(notification => {
+					return notification.read_at == null;
+				})
+			}
+		},
+
 		methods: {
+			logout() {
+				axios.post("/logout").then(response => window.location.reload());
+			},
 			markAsRead() {
 				axios.get('/mark-all-read/' + this.user.id)
 					.then(response => {
@@ -140,17 +175,33 @@
 					});
 			}
 		},
-		computed: {
-			unreadNotifications() {
-				return this.allNotifications.filter(notification => {
-					return notification.read_at == null;
-				})
-			}
-		},
+
 		created () {
 			this.$vuetify.theme.dark = true
 			// console.log('user ', window.user);
-			this.allNotifications = window.user.user.notifications;
+			this.allNotifications = this.user.notifications;
+
+			this.unreadNotifications = this.allNotifications.filter(notification => {
+				return notification.read_at == null;
+			});
+
+			// Echo.join(`chat`)
+			//     .here((users) => {
+			//     	console.log('present user', users);
+			//     })
+			//     .joining((user) => {
+			//         console.log(user.name);
+			//     })
+			//     .leaving((user) => {
+			//         console.log(user.name);
+			//     });
+
+			Echo.private('App.User.' + this.user.id)
+			.notification(notification => {
+			        // console.log(notification, 'new notification on realtime');
+
+			        this.allNotifications.unshift(notification.notification);
+			    });
 		},
 	}
 </script>
