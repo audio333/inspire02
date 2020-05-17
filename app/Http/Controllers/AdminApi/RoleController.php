@@ -16,7 +16,6 @@ class RoleController extends Controller
     function __construct(Role $role)
     {
         $this->role = $role;
-        $this->middleware('auth:api');
     }
     /**
      * Display a listing of the resource.
@@ -43,6 +42,14 @@ class RoleController extends Controller
         $role = $this->role->create([
             'name' => $request->name
         ]);
+
+        activity()
+            ->performedOn(new Role())
+            ->causedBy(auth()->user())
+            ->withProperties([
+                'name' => $request->name
+            ])
+            ->log('created');
 
         if ($request->has('permissions')) {
             $role->givePermissionTo(collect($request->permissions)->pluck('id')->toArray());
@@ -78,6 +85,16 @@ class RoleController extends Controller
         $role->update([
             'name' => $request->name
         ]);
+
+        activity()
+            ->performedOn(new Role())
+            ->causedBy(auth()->user())
+            ->withProperties([
+                'name' => $request->name
+            ])
+            ->log('updated');
+
+
 
         if ($request->has('permissions')) {
             $role->syncPermissions(collect($request->permissions)->pluck('id')->toArray());

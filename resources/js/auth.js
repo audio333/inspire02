@@ -16,6 +16,7 @@ export default class Auth {
 	}
 
 	can($permissionName) {
+		// return true;
 		return this.permissions().includes($permissionName);
 	}
 }

@@ -51,6 +51,7 @@ import Roles from './pages/Roles'
 import Permissions from './pages/Permissions'
 import Settings from './pages/Settings'
 import Developer from './pages/Developer'
+import Activities from './pages/Activities'
 
 const routes = [
 	{
@@ -76,6 +77,10 @@ const routes = [
 	{
 		path: '/admin/developer',
 		component: Developer
+	},
+	{
+		path: '/admin/activities',
+		component: Activities
 	},
 ];
 
